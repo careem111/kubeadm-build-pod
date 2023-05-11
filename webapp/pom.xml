@@ -21,13 +21,13 @@
     <module>webapp</module>
   </modules>
 
-  <distributionManagement>
-    <site>
-      <id>site-server</id>
-      <name>Test Project Site</name>
-      <url>file:///tmp/maven-project-site</url>
-    </site>
-  </distributionManagement>
+<distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>a0gegow2npum4-artifactory-primary-0-releases</name>
+        <url>https://kubekrm.jfrog.io/artifactory/libs-release-local</url>
+    </repository>
+</distributionManagement>
 
   <build>
     <plugins>
