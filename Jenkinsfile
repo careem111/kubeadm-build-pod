@@ -30,7 +30,7 @@
       stage('Checkout SCM') {
     	  steps{
           container('build-agent'){
-            sh 'mvn clean deploy -s settings.xml'
+            sh 'mvn clean package'
             }
 	        }
         }      
@@ -39,7 +39,7 @@
           container('build-agent'){
             script {
               docker.withRegistry( 'https://registry.hub.docker.com', 'docker'  ) {
-              dockerImage = docker.build 'careem785/webapp_4-5-23'
+              dockerImage = docker.build 'careem785/webapp_11-5-23'
               dockerImage.push('latest')
                   }
               }
@@ -52,7 +52,7 @@
             dir('charts') {
               withCredentials([usernamePassword(credentialsId: 'jfrog', usernameVariable: 'username', passwordVariable: 'password')]) {
               sh '/usr/local/bin/helm package webapp'
-              sh '/usr/local/bin/helm push-artifactory webapp-1.0.tgz https://kubekrm.jfrog.io/artifactory/dpthelm-helm-local/ --username $username --password $password'
+              sh '/usr/local/bin/helm push-artifactory webapp-2.0.tgz https://kubekrm.jfrog.io/artifactory/dpthelm-helm-local/ --username $username --password $password'
                   }
              }
           }
